@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import './css/bootstrap.css';
-import './css/dashboard.css';
 import Login from './components/login.js';
 import ForgotPassword from './components/forgotpassword.js';
+import MainPage from './components/mainpage.js';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,7 +17,7 @@ function App() {
       <Router>
         <Switch>
           <div className="App">
-            <Route exact path="/accounts/*" component={LoginContainer}/>
+            <Route exact path="/login/*" component={LoginContainer}/>
             <Route component={DashboardContainer}/>
           </div>
         </Switch>
@@ -27,17 +27,16 @@ function App() {
 }
 
 const LoginContainer = () => (
-  <div className="container">
-    <Route exact path="accounts/" render={() => <Redirect to="/login" />} />
-    <Route path="/accounts/login" component={Login} />
-    <Route path="/accounts/forgot-password" component={ForgotPassword} />
+  <div>
+    <Route path="/" component={Login} />
+    <Route path="/login/forgot-password" component={ForgotPassword} />
   </div>
 )
 
 const DashboardContainer = () => (
   <div>
-    <div className="container">
-  </div>
+    <Route exact path="/" render={() => <Redirect to="/app" />} />
+    <Route exact path="/app" component={MainPage}/>
   </div>
 )
 
