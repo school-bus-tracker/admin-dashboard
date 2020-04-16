@@ -1,37 +1,29 @@
 import React from 'react';
 import './App.css';
-import Login from './components/login.js';
-import ForgotPassword from './components/forgotpassword.js';
-import MainPage from './components/mainpage.js';
+import Login from './components/layout/login.js';
+import ForgotPassword from './components/layout/forgotpassword.js';
+import MainPage from './components/layout/mainpage.js';
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
+  Route
 } from 'react-router-dom';
 
-function App() {
+function App({history}) {
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
         <Switch>
           <div className="App">
-            <Route exact path="/login" component={Login}/>
+            <Route path="/login" component={Login}/>
             <Route path="/login/forgot-password" component={ForgotPassword} />
-            <Route component={DashboardContainer}/>
+            <Route path="/app" component={MainPage}/>
           </div>
         </Switch>
       </Router>
     </div>
   );
 }
-
-const DashboardContainer = () => (
-  <div>
-    <Route exact path="/" render={() => <Redirect to="/app" />} />
-    <Route exact path="/app" component={MainPage}/>
-  </div>
-)
 
 export default App;

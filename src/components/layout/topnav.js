@@ -1,5 +1,5 @@
 import React from 'react';
-import Notification from './notification';
+import Notification from '../elements/notification';
 import NavProfile from './navprofile';
 
 function topnav() {
