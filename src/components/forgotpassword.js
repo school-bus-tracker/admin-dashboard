@@ -14,7 +14,7 @@ function forgotpassword() {
                                 <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Reset Password</button>
                                 <hr className="my-4" />
                                 <div className="text-center">
-                                    <a className="small" href="/accounts/login">Already have an account? Login!</a>
+                                    <a className="small" href="/login">Already have an account? Login!</a>
                                 </div>
                             </form>
                         </div>

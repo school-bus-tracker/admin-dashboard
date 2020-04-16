@@ -1,6 +1,7 @@
 import React from 'react';
 import SideNav from './sidenav';
 import TopNav from './topnav'; 
+import Table from './table'; 
 
 function MainPage() {
     return (
@@ -10,7 +11,7 @@ function MainPage() {
                 <div id="content">
                     <TopNav/>
                     <div class="container-fluid">
-                        
+                        <Table/>
                     </div>
                 </div>
             </div>

@@ -17,7 +17,8 @@ function App() {
       <Router>
         <Switch>
           <div className="App">
-            <Route exact path="/login/*" component={LoginContainer}/>
+            <Route exact path="/login" component={Login}/>
+            <Route path="/login/forgot-password" component={ForgotPassword} />
             <Route component={DashboardContainer}/>
           </div>
         </Switch>
@@ -25,13 +26,6 @@ function App() {
     </div>
   );
 }
-
-const LoginContainer = () => (
-  <div>
-    <Route path="/" component={Login} />
-    <Route path="/login/forgot-password" component={ForgotPassword} />
-  </div>
-)
 
 const DashboardContainer = () => (
   <div>
