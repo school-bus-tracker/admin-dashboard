@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { api } from './constants'
+import {superuserURL } from './constants'
 
 export const loginService = (login) => {
     const userdata =
@@ -8,7 +8,7 @@ export const loginService = (login) => {
         "Password": login.password,
         "isSuperUser": true
     }
-    return axios.post(`${api}/authsuperusers`, userdata)
+    return axios.post(superuserURL, userdata)
 }
 
 export const setUserToken = (token) => {

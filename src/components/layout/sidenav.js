@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBusAlt, faChartArea, faUser, faList, faUserCheck } from '@fortawesome/free-solid-svg-icons';
+import { faBusAlt, faChartArea, faUser, faList, faUserCheck, faSchool } from '@fortawesome/free-solid-svg-icons';
 import {Link} from 'react-router-dom';
 function sidenav() {
     return (
@@ -29,6 +29,11 @@ function sidenav() {
             </li>
             <hr className="sidebar-divider"/>
             <div className="sidebar-heading">Management</div>
+            <li className="nav-item">
+                <Link className="nav-link" to="/app/school">
+                <FontAwesomeIcon icon={faSchool} className="svg-icon"/><span>School Management</span>
+                </Link>
+            </li>
             <li className="nav-item">
                 <Link className="nav-link collapsed" to="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <FontAwesomeIcon icon={faUser} className="svg-icon"/>

@@ -6,6 +6,7 @@ import Driver from '../content/driver';
 import Student from '../content/student';
 import Bus from '../content/bus';
 import Dashboard from '../content/dashboard';
+import School from '../content/school';
 import {getUserToken,logoutService} from '../../services/auth.js';
 import {
     Switch,
@@ -25,6 +26,7 @@ function MainPage() {
                     { token? "": <Redirect to="/login/"/>}
                         <Switch>
                             <Route exact path='/app/main' component={Dashboard}/>
+                            <Route path='/app/school' component={()=><School token={token}></School>}/>
                             <Route path='/app/admin' component={()=><Admin token={token}></Admin>}/>
                             <Route path='/app/driver' component={Driver}/>
                             <Route path='/app/student' component={Student}/>

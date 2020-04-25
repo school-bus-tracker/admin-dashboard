@@ -64,7 +64,7 @@ class login extends React.Component {
                                 </div> 
                             }
                             <form className="form-signin" onSubmit={this.handleLoginSubmit}>
-                                <input type="email" id="inputEmail" name="email" className="form-control" placeholder="Email address" onChange={this.handleLoginInput} required autofocus />
+                                <input type="email" id="inputEmail" name="email" className="form-control" placeholder="Email address" onChange={this.handleLoginInput} required/>
                                 <input type="password" id="inputPassword" name="password" className="form-control" placeholder="Password" onChange={this.handleLoginInput} required />
                                 <div className="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" className="custom-control-input" id="customCheck1" name="rememberMe" checked={this.state.rememberMe} onChange={this.handleLoginInput}/>

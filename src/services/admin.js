@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { api } from './constants'
+import { schooladminURL } from './constants'
 
 export const getAdmin = (token) => {
 
@@ -9,5 +9,5 @@ export const getAdmin = (token) => {
             "Content-Type": "application/json"
         }
     }
-    return axios.get(`${api}/schooladmins`, headers)
+    return axios.get(schooladminURL, headers)
 }
