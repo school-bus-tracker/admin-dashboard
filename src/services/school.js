@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { schoolURL } from './constants'
+import { schoolURL } from '../configs/endpoints'
 
 export const getSchools = (token) => {
     let config ={
@@ -18,7 +18,6 @@ export const insertSchool = (token, data)=>{
         data: data
     }
     return axios(config)
-
 }
 
 const getHeader = (token) =>{

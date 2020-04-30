@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { getFormElement } from '../../services/getformelement'
 import { insertSchool } from '../../services/school'
+import {getUserProfile} from '../../services/auth.js';
 
 class adddata extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class adddata extends Component {
         event.preventDefault()
         this.setState({ loading: true })
         let data = {
-            'SuperUserID':'5e9beb56fc17a800179e75f0'
+            'SuperUserID': getUserProfile().id
         }
         getFormElement(this.props.formElements).map(
             element => { data[element.name] = this.state[element.name] }

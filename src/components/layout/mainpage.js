@@ -7,7 +7,7 @@ import Student from '../content/student';
 import Bus from '../content/bus';
 import Dashboard from '../content/dashboard';
 import School from '../content/school';
-import {getUserToken,logoutService} from '../../services/auth.js';
+import {getUserToken,logoutService, getUserProfile} from '../../services/auth.js';
 import {
     Switch,
     Route,
@@ -16,12 +16,14 @@ import {
 
 function MainPage() {
     var token = getUserToken()
+    var profile = getUserProfile()
+
     return (
         <div id="wrapper">
             <SideNav/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                    <TopNav/>
+                    <TopNav name={profile.FirstName}/>
                     <div className="container-fluid">
                     { token? "": <Redirect to="/login/"/>}
                         <Switch>

@@ -1,13 +1,11 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import {loginService, setUserToken, getUserToken} from '../../services/auth.js'
+import {loginService, setUserToken, setUserProfile, getUserToken} from '../../services/auth.js'
 
 
 class login extends React.Component {
     constructor(props){
         super(props)
-        this.handleLoginInput = this.handleLoginInput.bind(this)
-        this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
         this.state={
             email: null,
             password: null,
@@ -19,7 +17,7 @@ class login extends React.Component {
     }
     
     
-    handleLoginInput(event){
+    handleLoginInput = (event) => {
         const target = event.target
         const value = target.name === 'rememberMe' ? target.checked : target.value
         const name = target.name
@@ -28,12 +26,13 @@ class login extends React.Component {
         });
     }
 
-    handleLoginSubmit(event){
+    handleLoginSubmit = (event) => {
         event.preventDefault()
         this.setState({loading:true})
         loginService(this.state).then(
             res =>{
                 setUserToken(res.data)
+                setUserProfile(res.data)
                 this.setState({redirect:true})
             }
         ).catch(
@@ -63,12 +62,12 @@ class login extends React.Component {
                                     {this.state.loginError}
                                 </div> 
                             }
-                            <form className="form-signin" onSubmit={this.handleLoginSubmit}>
-                                <input type="email" id="inputEmail" name="email" className="form-control" placeholder="Email address" onChange={this.handleLoginInput} required/>
-                                <input type="password" id="inputPassword" name="password" className="form-control" placeholder="Password" onChange={this.handleLoginInput} required />
+                            <form className="form-signin" onSubmit={this.handleLoginSubmit.bind(this)}>
+                                <input type="email" id="inputEmail" name="email" className="form-control" placeholder="Email address" onChange={this.handleLoginInput.bind(this)} required/>
+                                <input type="password" id="inputPassword" name="password" className="form-control" placeholder="Password" onChange={this.handleLoginInput.bind(this)} required />
                                 <div className="custom-control custom-checkbox mb-3">
-                                    <input type="checkbox" className="custom-control-input" id="customCheck1" name="rememberMe" checked={this.state.rememberMe} onChange={this.handleLoginInput}/>
-                                    <label className="custom-control-label" for="customCheck1">Remember Me</label>
+                                    <input type="checkbox" className="custom-control-input" id="remember" name="rememberMe" checked={this.state.rememberMe} onChange={this.handleLoginInput.bind(this)}/>
+                                    <label className="custom-control-label" htmlFor="remember">Remember Me</label>
                                 </div>
                                  <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit" disabled={this.state.loading}>
                                     { this.state.loading && <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> }

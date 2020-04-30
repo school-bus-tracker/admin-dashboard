@@ -2,7 +2,8 @@ import React from 'react';
 import Notification from '../elements/notification';
 import NavProfile from './navprofile';
 
-function topnav() {
+
+function topnav(props) {
     return (
         <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
@@ -10,7 +11,7 @@ function topnav() {
           <ul className="navbar-nav ml-auto">
             <Notification/>
             <div className="topbar-divider d-none d-sm-block"></div>
-            <NavProfile/>
+            <NavProfile name={props.name}/>
           </ul>
 </nav>
     )

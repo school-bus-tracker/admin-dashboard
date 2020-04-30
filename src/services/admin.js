@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { schooladminURL } from './constants'
+import { schooladminURL } from '../configs/endpoints'
 
 export const getAdmin = (token) => {
 
