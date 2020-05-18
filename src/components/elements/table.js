@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 
 class table extends Component {
+ 
   renderData = (data, objId, rowName) => {
     if (data === "true")
       return <FontAwesomeIcon icon={faCheckCircle} color="green" />;
@@ -17,12 +18,13 @@ class table extends Component {
 
     if (rowName === data)
       return (
-        <Link to={() => this.props.editForm(objId)}>
+        <Link onClick={e => this.props.editForm(e, objId)}>
           <p>{rowName}</p>
         </Link>
       );
     return data;
   };
+
 
   renderTableRow = (row) => {
     const objId = row._id;
@@ -37,14 +39,14 @@ class table extends Component {
     return Object.values(
       head
         .filter((field) => field !== "_id")
-        .map((head) => <th key={head}>{head}</th>)
+        .map((head) => <th key={head} >{head}</th>)
     );
   };
-
+  
   render() {
     return (
       <div className="table-responsive">
-        <table className="table table-bordered table-hover text-left">
+        <table id="datatable" data-page-length="25" className="table table-bordered table-hover text-left">
           <thead>
             <tr>{this.renderTableHead(this.props.head)}</tr>
           </thead>
@@ -52,6 +54,9 @@ class table extends Component {
             {this.props.data.map((row) => (
               <tr key={row._id}>{this.renderTableRow(row)}</tr>
             ))}
+            {
+              console.log(this.props.data.length)
+            }
           </tbody>
         </table>
       </div>

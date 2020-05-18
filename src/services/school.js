@@ -7,8 +7,28 @@ export const getSchools = (token) => {
     url: schoolURL,
     headers: getHeader(token),
   };
-  return axios(schoolURL, config);
+  return axios(config);
 };
+
+export const getSchool = (token, id) => {
+  const config = {
+    method: "get",
+    url: `${schoolURL}/${id}`,
+    headers: getHeader(token),
+  };
+  return axios(config);
+};
+
+export const editSchool = (token, id, data) => {
+  const config = {
+    method: "put",
+    url: `${schoolURL}/${id}`,
+    headers: getHeader(token),
+    data:data
+  };
+  return axios(config);
+};
+
 
 export const insertSchool = (token, data) => {
   const config = {

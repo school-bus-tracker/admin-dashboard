@@ -3,7 +3,6 @@ import "./App.css";
 import Login from "./components/layout/login.js";
 import ForgotPassword from "./components/layout/forgotpassword.js";
 import MainPage from "./components/layout/mainpage.js";
-import { getUserToken } from "./services/auth.js";
 
 import {
   BrowserRouter as Router,

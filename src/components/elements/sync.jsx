@@ -6,6 +6,7 @@ class Sync extends Component {
     return (
       <button
         type="button"
+        title="Refresh"
         className="d-none d-sm-inline-block btn btn-m btn-secondary shadow-sm btn-icon-split"
         onClick={this.props.refresh}
       >

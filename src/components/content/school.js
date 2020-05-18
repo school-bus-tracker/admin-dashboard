@@ -6,6 +6,9 @@ import AddData from "../elements/adddata";
 import { getSchools } from "../../services/school";
 import { DiscardMetaFields } from "../../utils/helper";
 import Spinner from "../elements/spinner";
+import EditData from "../elements/editdata";
+import Add from "../elements/add";
+import { getSchool } from "../../services/school";
 
 class school extends Component {
   state = {
@@ -23,6 +26,10 @@ class school extends Component {
     isLoading: true,
     formFields: {},
     count: 0,
+    showEditForm: false,
+    showAddForm: false,
+    showTable: true,
+    editID: null,
   };
 
   async componentDidMount() {
@@ -54,8 +61,36 @@ class school extends Component {
     }
   };
 
-  handleEditForm = (id) => {
-    console.log(id);
+  handleAdd = () => {
+    this.setState({
+      showAddForm: true,
+      showTable: false,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      showAddForm: false,
+      showEditForm: false,
+      showTable: true,
+    });
+    this.handleRefresh();
+  }
+
+  handleEditForm = async (event, id) => {
+    event.preventDefault();
+    try {
+      const res = await getSchool(this.props.token, id);
+      this.setState({
+        editData: res.data,
+        showEditForm: true,
+        showTable: false,
+        editID: id,
+      });
+
+    } catch (error) {
+      this.setState({ error: error.response });
+    }
   };
 
   render() {
@@ -72,32 +107,45 @@ class school extends Component {
 
     return (
       <React.Fragment>
-        <div className="text-right p-3">
-          {this.state.isLoading && <Spinner />}
-          {!this.state.isLoading && <Sync refresh={this.handleRefresh} />}
-          {!this.state.isLoading && (
-            <AddData
-              name={"Add School"}
-              formElements={schoolFields.filter(
-                (field) => field !== "IsActive"
-              )}
-              token={this.props.token}
-            ></AddData>
-          )}
-          {!this.state.isLoading &&
-            (this.state.schoolData.length > 0 ? (
-              <div>
-                <p className="text-left">{`${this.state.schoolData.length} Records were Found`}</p>
-                <Table
-                  head={schoolFieldsLocal}
-                  data={schoolDataLocal}
-                  editForm={this.handleEditForm}
-                ></Table>
-              </div>
-            ) : (
+        {this.state.isLoading && <Spinner />}
+        {this.state.showAddForm && (
+          <AddData
+            name={"Add School"}
+            formElements={schoolFields.filter((field) => field !== "IsActive")}
+            close={this.handleClose}
+            token={this.props.token}
+          ></AddData>
+        )}
+        {this.state.showEditForm && (
+          <EditData
+            name={"Edit School"}
+            id={this.state.editID}
+            formElements={schoolFields}
+            data={this.state.editData} 
+            close={this.handleClose}
+            token={this.props.token}></EditData>
+        )}
+        {!this.state.isLoading &&
+          this.state.showTable &&
+          <div className="text-right p-3">
+            <Sync refresh={this.handleRefresh} />
+            <Add add={this.handleAdd} />
+          </div>
+        }
+        {!this.state.isLoading &&
+          this.state.showTable &&
+          (this.state.schoolData.length > 0 ? (
+            <div>
+              <p className="text-left">{`${this.state.schoolData.length} Records were Found`}</p>
+              <Table
+                head={schoolFieldsLocal}
+                data={schoolDataLocal}
+                editForm={this.handleEditForm}
+              ></Table>
+            </div>
+          ) : (
               <p className="text-center">No Records were Found</p>
             ))}
-        </div>
       </React.Fragment>
     );
   }
